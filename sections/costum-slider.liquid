@@ -1,0 +1,314 @@
+{% schema %}
+{
+  "name": "Costum Slideshow",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image"
+        },
+        {
+          "type": "text",
+          "id": "paragraph_text",
+          "label": "Paragraph Text",
+          "default": "This is a paragraph before the title."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Slide Title",
+          "default": "Slide Title"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Costum Slideshow",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="slideshow-section" style="font-family: {{ section.settings.font_family }};">
+  <div class="slideshow-container">
+    {% for block in section.blocks %}
+      <div class="slide">
+        <img src="{{ block.settings.image | img_url: '2000x' }}" alt="{{ block.settings.title }}">
+       <div class="slide-content">
+          <p style="color: {{ section.settings.text_color }};">{{ block.settings.paragraph_text }}</p>
+          <h2 style="color: {{ section.settings.text_color }};">{{ block.settings.title }}</h2>
+          <a
+            href="{{ block.settings.button_link }}"
+            class="slide-button"
+            style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};"
+          >
+            {{ block.settings.button_text }}
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="dots-container">
+    {% for block in section.blocks %}
+      <span class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .slideshow-section {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-bottom:20px
+  }
+
+  .slideshow-container {
+    display: flex;
+    transition: transform 0.5s ease;
+    border-top: 1px solid #444;
+  }
+  
+  .slide {
+    min-width: 100%;
+    position: relative;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .slide-content {
+   
+    width:40%;
+    position: absolute;
+    top:80px;
+    left:9%;
+    text-align: left;
+  }
+  .slide-content p {
+    font-size: 16px;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 10px; 
+    margin-top: 5px; 
+    padding: 0; 
+  }
+  
+  
+  .slide-content h2 {
+    font-size: 64px !important;
+    color: {{ section.settings.text_color }};
+  
+    margin-bottom: 40px !important;
+      margin-top: 0;
+  }
+  
+  .slide-button {
+    padding: 10px 30px;
+    font-size: 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    background-color: {{ section.settings.button_color }};
+    color: {{ section.settings.button_text_color }};
+  }
+  
+  .dots-container {
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+  }
+  
+  .dot {
+    cursor: pointer;
+    height: 8px; 
+    width: 8px;
+    margin: 0 5px;
+    background-color: transparent;
+    border: 1px solid #000;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+  }
+  
+  .dot.active {
+    background-color: #000; 
+    border: 1px solid #000; 
+    height:8px;
+    width:8px;
+  }
+  
+  .dot.active::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 18px;
+    height: 18px;
+    border: 1px solid #000; 
+    border-radius: 50%;
+  }
+  
+  @media (max-width: 1024px) {
+    .dots-container {
+      display: none;
+    }
+  
+    .slide-content {
+      width: 60%; 
+      left: 5%; 
+      top: 10%;
+    }
+  
+    .slide-content h2 {
+      font-size: 48px !important; 
+    }
+  
+    .slide-content p {
+      font-size: 14px; 
+    }
+  
+    .slide-button {
+      padding: 8px 16px; 
+      font-size: 12px; 
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .dots-container {
+      display: none; 
+    }
+  
+    .slide-content {
+      width: 80%; 
+      
+    }
+  
+    .slide-content h2 {
+      font-size: 16px !important; 
+      margin: 8px 0 !important;
+    }
+  
+    .slide-content p {
+      font-size: 7px; 
+      margin-bottom: 5px; 
+    }
+  
+    .slide-button {
+      padding: 5px 9px; 
+      font-size: 7px; 
+    }
+  }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+  
+    
+    showSlide(currentIndex);
+  
+   
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.transform = `translateX(-${index * 100}%)`;
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+  
+  
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentIndex = index;
+        showSlide(currentIndex);
+      });
+    });
+  });
+    document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.slide');
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    let startX = 0;
+    let currentIndex = 0;
+  
+    showSlide(currentIndex);
+  
+  
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.transform = `translateX(-${index * 100}%)`;
+      });
+    }
+  
+    slideshowContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+  
+    slideshowContainer.addEventListener('touchmove', (e) => {
+      e.preventDefault(); 
+    });
+  
+    slideshowContainer.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diffX = startX - endX;
+  
+      if (diffX > 50 && currentIndex < slides.length - 1) {
+        currentIndex++;
+      } else if (diffX < -50 && currentIndex > 0) {
+        currentIndex--;
+      }
+  
+      showSlide(currentIndex);
+    });
+  });
+  </script>

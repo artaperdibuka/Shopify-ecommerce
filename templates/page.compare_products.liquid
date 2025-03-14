@@ -1,0 +1,51 @@
+{% layout 'theme' %}
+
+
+<link rel="stylesheet" href="{{ 'compare_products.css' | asset_url }}" type="text/css">
+
+<div class="compare-page">
+  <h1>Compared Products</h1>
+  <div class="compare-products" id="compare-products"></div>
+  <button onclick="clearCompareList()">Clear Compare List</button>
+</div>
+
+<script>
+  const compareList = JSON.parse(localStorage.getItem('compareProducts')) || [];
+  const compareProductsContainer = document.getElementById('compare-products');
+
+  if (compareList.length > 0) {
+    const tableHTML = `
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${compareList.map(product => `
+             <tr>
+            <td><img src="${product.image}" alt="${product.title}" class="compare-image"></td>
+            <td>${product.title}</td>
+             <td>${product.price ? product.price : 'N/A'}</td>
+             <td>${product.description ? product.description : 'N/A'}</td>
+
+            <td><a href="${product.url}" target="_blank">View Product</a></td>
+          </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+    compareProductsContainer.innerHTML = tableHTML;
+  } else {
+    compareProductsContainer.innerHTML = '<p>No products to compare.</p>';
+  }
+
+  function clearCompareList() {
+    localStorage.removeItem('compareProducts');
+    location.reload(); 
+  }
+</script>

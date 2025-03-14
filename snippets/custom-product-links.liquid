@@ -1,0 +1,95 @@
+<div class="custom-product-links">
+  <div class="custom-product-links__item">
+    {% if block.settings.image_1 %}
+      <a href="#" class="custom-link" onclick="addToCompare('{{ product.title }}', '{{ product.url }}', '{{ product.featured_image | img_url: 'medium' }}', '{{ product.price | default: 0 | money }}', '{{ product.description | default: 'N/A' | strip_html }}')"
+>
+  <img src="{{ block.settings.image_1 | img_url: 'medium' }}" alt="Compare Icon">
+</a>
+    {% endif %}
+    <div class="custom-product-links__text">
+      <a href="#" class="custom-link" onclick="addToCompare('{{ product.title }}', '{{ product.url }}', '{{ product.featured_image | img_url: 'medium' }}', '{{ product.price | default: 0 | money }}', '{{ product.description | default: 'N/A' | strip_html }}')"
+>
+      </a>
+      <a href="/pages/compare" class="custom-link">
+        <h3>{{ block.settings.title_1 }}</h3>
+      </a>
+    </div>
+  </div>
+
+  <!-- Share -->
+  <div class="custom-product-links__item">
+    {% if block.settings.image_2 %}
+      <a href="#" class="custom-link" onclick="shareProduct('{{ product.title }}', '{{ product.url }}')">
+        <img src="{{ block.settings.image_2 | img_url: 'medium' }}" alt="Share Icon">
+      </a>
+    {% endif %}
+    <div class="custom-product-links__text">
+      <a href="#" class="custom-link" onclick="shareProduct('{{ product.title }}', '{{ product.url }}')">
+        <h3>{{ block.settings.title_2 }}</h3>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-product-links {
+    display: flex;
+    align-items: center; 
+    gap: 20px !important; 
+  }
+
+  .custom-product-links__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0; 
+  }
+
+  .custom-product-links img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  .custom-product-links__text h3 {
+    margin: 0; 
+    font-size: 15px;
+    color: #333;
+  }
+
+  .custom-link {
+    text-decoration: none;
+  }
+</style>
+
+<script>
+    function addToCompare(title, url, image, price, description) {
+      console.log({{ product | json }});  
+      let compareList = JSON.parse(localStorage.getItem('compareProducts')) || [];
+      const productExists = compareList.some(product => product.url === url);
+      if (productExists) {
+        alert('This product is already in the comparison list.');
+        return;
+      }
+      compareList.push({ title, url, image, price, description });
+      localStorage.setItem('compareProducts', JSON.stringify(compareList));
+      alert('The product has been added to the comparison list.');
+  }
+  
+  function shareProduct(title, url) {
+      if (navigator.share) {
+        navigator.share({
+          title: title,
+          url: url
+        }).then(() => {
+          console.log('The product was successfully shared.');
+        }).catch((error) => {
+          console.log('Error while sharing the product:', error);
+        });
+      } else {
+        alert("Your browser does not support product sharing.");
+      }
+  }
+
+</script>

@@ -1,0 +1,256 @@
+{% schema %}
+  {
+    "name": "Category Carousel",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "category",
+        "name": "Category",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "category_image",
+            "label": "Category Image"
+          },
+          {
+            "type": "text",
+            "id": "category_name",
+            "label": "Category Name"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Shop Now"
+          },
+          {
+            "type": "url",
+            "id": "category_link",
+            "label": "Collection URL"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Category Carousel",
+        "category": "Custom"
+      }
+    ]
+  }
+
+{% endschema %}
+
+<section class="category-carousel">
+  <h2 class="carousel-title">Categories</h2>
+  <div class="carousel-container">
+    <button class="carousel-button prev">&#10094;</button>
+    <div class="carousel-track">
+      {% for block in section.blocks %}
+        <div class="carousel-item">
+          <div class="image-container">
+            <img src="{{ block.settings.category_image | img_url: '300x' }}" alt="{{ block.settings.category_name }}">
+            <a href="{{ block.settings.category_link }}" class="category-button">{{ block.settings.button_text }}</a> 
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-button next">&#10095;</button>
+  </div>
+</section>
+
+
+<style>
+  .category-carousel {
+    text-align: center;
+    padding: 40px;
+    
+  }
+  
+  .carousel-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .carousel-container {
+    position: relative;
+    max-width: 1110px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .carousel-item {
+    flex: 0 0 25%; 
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .image-container img {
+    width: 100%;
+    border-radius: 10px;
+    display: block; 
+  }
+  
+    .category-button {
+      display: inline-block;
+      text-decoration: none;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      color: black;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 130px;
+      margin: 10px auto;
+      border: none;
+    }
+  
+  .category-button:hover {
+    background-color: black;
+    color: white;
+  }
+
+  
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    font-size: 20px;
+    color: black;
+  }
+  
+  .carousel-button.prev {
+    left: 10px;
+  }
+  
+  .carousel-button.next {
+    right: 10px;
+  }
+  
+  .carousel-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  @media (max-width: 1024px) {
+    .carousel-item {
+      flex: 0 0 33.33%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-item {
+      flex: 0 0 50%; 
+    }
+  
+    .category-button {
+      padding: 8px 16px; 
+      font-size: 12px;
+      max-width: 110px;
+    }
+  
+    .carousel-button {
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .carousel-item {
+      flex: 0 0 100%; 
+    }
+  
+    .category-button {
+      padding: 6px 12px;
+      font-size: 10px;
+      max-width: 90px;
+    }
+  
+    .carousel-button {
+      width: 25px;
+      height: 25px;
+      font-size: 14px;
+    }
+  
+    .carousel-title {
+      font-size: 1.5em; 
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  const carouselTrack = document.querySelector('.carousel-track');
+  const carouselItems = document.querySelectorAll('.carousel-item');
+  const prevButton = document.querySelector('.carousel-button.prev');
+  const nextButton = document.querySelector('.carousel-button.next');
+  let currentIndex = 0;
+
+  function getItemsPerPage() {
+    if (window.innerWidth <= 480) {
+      return 1;
+    } else if (window.innerWidth <= 768) {
+      return 2; 
+    } else if (window.innerWidth <= 1024) {
+      return 3; 
+    } else {
+      return 4; 
+    }
+  }
+
+
+  function updateCarousel() {
+    const itemsPerPage = getItemsPerPage(); 
+    const offset = -currentIndex * (100 / itemsPerPage); 
+    carouselTrack.style.transform = `translateX(${offset}%)`;
+  }
+
+  prevButton.addEventListener('click', function() {
+    const itemsPerPage = getItemsPerPage();
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  nextButton.addEventListener('click', function() {
+    const itemsPerPage = getItemsPerPage();
+    if (currentIndex < Math.ceil(carouselItems.length / itemsPerPage) - 1) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  window.addEventListener('resize', function() {
+    updateCarousel();
+  });
+});
+</script>

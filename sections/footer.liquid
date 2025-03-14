@@ -1,0 +1,760 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{{ 'section-footer.css' | asset_url | stylesheet_tag }}
+{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-paymentv.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .footer {
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+    font-size: 0.9em;
+    background-color: #F7F7F7;
+    height: 369px;
+}
+
+.page-width {
+    max-width: 1240px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+  }
+
+
+.section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+}
+
+@media screen and (min-width: 750px) {
+    .footer {
+        margin-top: {{ section.settings.margin_top }}px;
+        padding-top: 40px; 
+        height: 369px;
+    }
+
+    .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+}
+
+   .footer__content-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px; 
+      margin-top: 5px; 
+      margin-bottom:50px;
+      align-items: flex-start; 
+     
+  }
+
+  .store-info {
+    width: 300px; 
+    height: 200px; 
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    padding: 10px; 
+  }
+  .contact-info {
+    display: flex; 
+    align-items: flex-start; 
+    gap: 20px;
+    font-size: 0.9em; 
+  }
+
+  .contact-info__labels,
+  .contact-info__values {
+    display: inline-block; 
+    vertical-align: top; 
+  }
+
+  .contact-info p {
+    font-size: 0.9em; 
+    color: #666; 
+    margin: 0 0 10px 0; 
+    line-height: 1.5;
+  }
+  .store-name {
+    height: 42px; 
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    gap: 12px; 
+    font-weight: 600; 
+    font-size: 30px; 
+    line-height: 42px; 
+    letter-spacing: 0;
+    text-align: left;
+  }
+  .footer-container {
+    display: flex;
+    justify-content: space-between; 
+    width: 590px; 
+    height: auto; 
+    gap: 20px; 
+  }
+  .footer-column {
+    flex: 1;
+    flex-direction: column;
+    gap: 10px; 
+  }
+  
+  .footer-column h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333; 
+  }
+
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column ul li {
+    margin: 1px 0; 
+  }
+  
+  .footer-column ul li a {
+    text-decoration: none;
+    color: #666; 
+  }
+  
+  .footer-column ul li a:hover {
+    color: #000; 
+    text-decoration: underline;
+  }
+  .footer__newsletter {
+    flex: 1;
+    width: 300px;
+    height: auto;
+  }
+
+  .footer__newsletter h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .footer__newsletter p {
+    font-size: 0.9em; 
+    color: #666; 
+  }
+  .newsletter-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; 
+  }
+  
+  .field__input {
+    width: 100%;
+    padding: 10px 50px 10px 10px !important;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    height: 52px;
+  }
+  .field__input::placeholder {
+    color: #999; 
+    opacity: 1; 
+  }
+
+  .newsletter-form__button {
+    position: absolute;
+    right: 5px; 
+    top: 50%;
+    transform: translateY(-50%); 
+    background-color: #000 !important; 
+    color: #fff; 
+    border: none;
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease; 
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .newsletter-form__button:hover {
+    background-color: #444; 
+  }
+  
+  .newsletter-form__button::after {
+    content: "";
+    display: block;
+    width: 12px; 
+    height: 12px;
+    border-right: 2px solid #fff; 
+    border-top: 2px solid #fff; 
+    transform: rotate(45deg); 
+  }
+  
+  .newsletter-form__button::before {
+    content: "";
+    display: block;
+    width: 15px; 
+    height: 2px; 
+    background-color: #fff; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+  }
+ 
+  .footer-social-icons {
+    display: flex; /
+    gap: 15px;
+    align-items: center;
+  }
+
+  .footer-social-icons a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    margin-top:10px;
+  }
+ 
+  .footer-social-icons a:hover {
+    background-color: #ddd;
+  }
+ 
+  .icon {
+    width: 24px;
+    height: 24px;
+    fill: #000;
+  }
+  .footer__bottom {
+    text-align: left;
+    margin-top: 12px;
+    padding-top: 10px;
+    color: #696C70;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    font-size:14px;
+    max-width: 1190px; 
+    border-top: 1px solid #ddd;
+}
+
+  .footer__bottom-left {
+    flex: 1;
+    
+  }
+  
+  .footer__bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+  }
+  
+  .footer__payments ul {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer__payments ul li {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .footer__custom-image {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .footer__custom-image img {
+    max-width: 80px;
+    height: auto;
+  }
+  
+  .footer__custom-image h3 {
+    color: #696C70;
+    text-align: center;
+    margin: 0;
+    gap:5px;
+    font-size:14px
+  }
+  @media screen and (max-width: 750px) {
+    .footer {
+      font-size: 0.8em;
+      padding-top: 20px;
+      height: auto;
+      flex-direction: column; 
+      align-items: center; 
+    }
+
+    .footer__content-top {
+      flex-direction: column;
+      gap: 15px;
+      align-items: center; 
+    }
+
+    .footer-container {
+      flex-direction: column;
+      width: 100%;
+      gap: 15px;
+      align-items: center; 
+    }
+
+    .store-info,
+    .contact-info,
+    .footer-column {
+      width: 100%; 
+      text-align: center;
+      justify-content: center;
+     
+    }
+
+    .store-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      justify-content: center;
+    }
+
+    .footer__newsletter {
+
+      text-align: center; 
+    }
+
+    .newsletter-wrapper {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center; 
+      width:90%;
+    }
+
+    .footer-social-icons {
+      flex-direction: row;
+      gap: 10px;
+      justify-content: center;
+    }
+
+   
+
+    .footer__bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: space-between; 
+      align-items: center; 
+      width: 100%;
+      font-size:12px;
+    }
+    
+    .footer__bottom-left {
+      order: 2; 
+      text-align: left;
+      font-size:12px;
+    }
+    
+    .footer__bottom-right {
+      order: 1; 
+      text-align: right;
+      font-size:12px;
+    }
+       h3 {
+      font-size: 12px !important;
+    }
+    
+      }
+
+  @media screen and (min-width: 751px) and (max-width: 1024px) {
+    .footer {
+      font-size: 0.85em;
+      padding-top: 30px;
+      height: auto;
+    }
+  
+    .footer__content-top {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+    }
+  
+    .store-info {
+      width: 250px;
+      height: auto;
+    }
+  
+    .footer-container {
+      width: 100%;
+      gap: 15px;
+      justify-content: space-between;
+    }
+  
+    .footer-column {
+      flex: 1;
+      text-align: left;
+    }
+  
+    .footer__newsletter {
+      width: 100%;
+      text-align: left;
+    }
+  
+    .newsletter-wrapper {
+      flex-direction: row;
+      gap: 10px;
+    }
+  
+    .footer-social-icons {
+      justify-content: flex-start;
+    }
+  
+    .footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .footer__bottom-left,
+    .footer__bottom-right {
+      flex: 1;
+      text-align: left;
+      font-size:12px
+    }
+  
+    .footer__custom-image h3 {
+      font-size: 12px;
+    }
+  
+    .store-name {
+      font-size: 18px !important;
+      line-height: 32px;
+    }
+
+  @media screen and (min-width: 751px) and (max-width: 1024px) {
+    .contact-info {
+      gap: 0;
+    }
+  
+    .contact-info__labels,
+    .contact-info__values {
+      display: flex; 
+      flex-direction: column; 
+      gap: 5px;
+    }
+  
+    .contact-info p {
+      margin: 0; 
+      white-space: nowrap; 
+    }
+  
+    .contact-info__labels p::after {
+      content: ":"; 
+      margin-right: 5px; 
+    }
+  }
+    .field__input {
+      width: 100%;
+      font-size:12px;
+    }
+  
+    .newsletter-form__button {
+      width: 30%;
+    }
+  
+    .footer-social-icons {
+      justify-content: flex-start;
+      gap: 10px;
+    }
+  
+    .footer-social-icons a {
+      width: 28px;
+      height: 28px;
+    }
+  
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+   
+{%- endstyle -%}
+
+<footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="footer__content-top page-width">
+    <!-- Kolona 1: Informacion -->
+    <div class="store-info">
+      <div class="store-name">
+        <h1>{{ section.settings.store_name }}</h1>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-info__labels">
+          <p><strong>Mail:</strong></p>
+          <p><strong>Phone:</strong></p>
+          <p><strong>Address:</strong></p>
+        </div>
+     
+        <div class="contact-info__values">
+          <p>{{ section.settings.email }}</p>
+          <p>{{ section.settings.phone }}</p>
+          <p>{{ section.settings.address }}</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Quick Shop</h3>
+        <ul>
+          <li><a href="#">Women</a></li>
+          <li><a href="#">Men</a></li>
+          <li><a href="#">Kids</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Customer Service</h3>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Order Tracking</a></li>
+          <li><a href="#">Size Guide</a></li>
+        </ul>
+      </div>
+    </div>
+
+     <div class="footer__column footer__newsletter">
+      <h3>Newsletter</h3>
+      <p>Sign up for our newsletter and get 10% off your first purchase.</p>
+      {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-wrapper">
+         <input
+            id="NewsletterForm--{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            class="field__input"
+            placeholder="Enter your e-mail"
+            required
+          >
+          <button type="submit" class="newsletter-form__button field__button">
+          </button>
+        </div>
+       
+        <div class="footer-social-icons">
+          <a href="{{ settings.social_facebook_link }}" target="_blank" aria-label="Facebook">
+            <svg class="icon icon-facebook" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M15.1742424,5.3203125 L17,5.3203125 L17,2.140625 C16.6856061,2.09765625 15.6022727,2 14.3409091,2 C11.7083333,2 9.90530303,3.65625 9.90530303,6.69921875 L9.90530303,9.5 L7,9.5 L7,13.0546875 L9.90530303,13.0546875 L9.90530303,22 L13.4659091,22 L13.4659091,13.0546875 L16.2537879,13.0546875 L16.6969697,9.5 L13.4659091,9.5 L13.4659091,7.05078125 C13.4659091,6.0234375 13.7424242,5.3203125 15.1742424,5.3203125 Z"/>
+            </svg>
+          </a>
+                <a href="{{ settings.social_instagram_link }}" target="_blank" aria-label="Instagram">
+            <svg class="icon icon-instagram" width="24px" height="24px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
+              <title>Instagram icon</title>
+              <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+            </svg>
+          </a>
+                <a href="{{ settings.social_youtube_link }}" target="_blank" aria-label="YouTube">
+            <svg class="icon icon-youtube" width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <path d="M29.41,9.26a3.5,3.5,0,0,0-2.47-2.47C24.76,6.2,16,6.2,16,6.2s-8.76,0-10.94.59A3.5,3.5,0,0,0,2.59,9.26,36.13,36.13,0,0,0,2,16a36.13,36.13,0,0,0,.59,6.74,3.5,3.5,0,0,0,2.47,2.47C7.24,25.8,16,25.8,16,25.8s8.76,0,10.94-.59a3.5,3.5,0,0,0,2.47-2.47A36.13,36.13,0,0,0,30,16,36.13,36.13,0,0,0,29.41,9.26ZM13.2,20.2V11.8L20.47,16Z"/>
+            </svg>
+          </a>
+       
+          <a href="{{ settings.social_twitter_link }}" target="_blank" aria-label="Twitter">
+            <svg class="icon icon-twitter" width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+            </svg>
+          </a>
+       
+          <a href="{{ settings.social_pinterest_link }}" target="_blank" aria-label="Pinterest">
+            <svg class="icon icon-pinterest" width="16px" height="16px" viewBox="-3 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="m0 8.61c0-.015 0-.033 0-.051 0-1.038.199-2.029.56-2.938l-.019.054c.363-.928.868-1.725 1.497-2.405l-.005.005c1.283-1.37 2.931-2.383 4.789-2.884l.071-.016c.871-.238 1.871-.375 2.904-.375h.011-.001.073c1.516 0 2.95.355 4.222.985l-.056-.025c1.313.646 2.39 1.596 3.169 2.762l.018.029c.768 1.135 1.226 2.535 1.226 4.041 0 .034 0 .069-.001.103v-.005.016c0 .954-.1 1.885-.29 2.782l.015-.087c-.202.965-.501 1.819-.894 2.617l.029-.064c-.396.827-.877 1.538-1.447 2.168l.007-.008c-.576.621-1.272 1.123-2.051 1.47l-.04.016c-.78.351-1.691.556-2.65.556-.027 0-.053 0-.08 0h.004c-.71-.006-1.379-.175-1.973-.473l.026.012c-.596-.264-1.073-.705-1.377-1.255l-.008-.015q-.144.56-.4 1.622t-.339 1.37q-.08.31-.296 1.024c-.112.4-.24.74-.393 1.066l.018-.042-.462.902c-.224.437-.444.804-.686 1.154l.022-.034q-.361.526-.894 1.247l-.202.072-.13-.144q-.216-2.265-.216-2.711c.013-1.062.125-2.089.328-3.083l-.018.105q.31-1.651.96-4.146t.75-2.928c-.294-.654-.466-1.418-.466-2.223 0-.076.002-.151.005-.226v.011c0-.851.279-1.636.75-2.27l-.007.01c.405-.635 1.106-1.051 1.904-1.053.027-.002.058-.002.09-.002.511 0 .969.226 1.279.584l.002.002c.306.378.492.864.492 1.394 0 .03-.001.059-.002.089v-.004c-.073 1.01-.3 1.946-.656 2.816l.022-.061c-.329.791-.555 1.707-.632 2.665l-.002.032c0 .014-.001.031-.001.048 0 .578.25 1.098.648 1.457l.002.002c.399.371.935.599 1.525.599.017 0 .033 0 .05-.001h-.002.024c.53 0 1.028-.134 1.464-.369l-.016.008c.455-.244.834-.574 1.126-.972l.006-.009c.292-.396.561-.846.787-1.32l.021-.05c.219-.455.408-.986.537-1.54l.011-.053c.106-.425.208-.968.28-1.52l.009-.08c.058-.429.092-.927.094-1.433v-.002c.005-.082.008-.177.008-.273 0-1.428-.61-2.714-1.583-3.611l-.003-.003c-1.034-.87-2.38-1.398-3.85-1.398-.094 0-.188.002-.281.006h.013c-.057-.002-.123-.003-.19-.003-1.799 0-3.431.713-4.629 1.872l.002-.002c-1.194 1.149-1.936 2.761-1.936 4.546 0 .067.001.134.003.201v-.10.012c0 .433.066.85.188 1.243l-.008-.03c.102.357.235.669.401.958l-.011-.021q.209.346.39.656c.088.125.151.273.179.433l.001.007c-.019.383-.097.742-.224 1.077l.008-.024q-.216.649-.534.649-.029 0-.245-.043c-.517-.158-.958-.438-1.304-.806l-.001-.002c-.368-.381-.666-.832-.87-1.332l-.01-.028c-.184-.439-.346-.961-.459-1.5l-.10-.058c-.099-.46-.157-.99-.159-1.533v-.002z"/>
+            </svg>
+          </a>
+        </div>
+       
+
+
+
+      {%- endform -%}
+      </div>
+  </div>
+
+
+ <div class="footer__bottom page-width">
+  <div class="footer__bottom-left">
+    <p>© {{ 'now' | date: '%Y' }} {{ section.settings.store_name }}. All Rights Reserved.</p>
+  </div>
+  <div class="footer__bottom-right">
+  
+    <div class="footer__payments">
+      {%- if section.settings.show_payment_icons -%}
+        <ul class="payment-icons">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+
+    <div class="footer__custom-image">
+     <h3>Payment:</h3>
+      {%- if section.settings.custom_image != blank -%}
+        <img src="{{ section.settings.custom_image | img_url: '100x' }}" alt="{{ section.settings.custom_image.alt }}">
+      {%- endif -%}
+       {%- if section.settings.custom_image1 != blank -%}
+        <img src="{{ section.settings.custom_image1 | img_url: '100x' }}" alt="{{ section.settings.custom_image1.alt }}">
+      {%- endif -%}
+       {%- if section.settings.custom_image2 != blank -%}
+        <img src="{{ section.settings.custom_image2 | img_url: '100x' }}" alt="{{ section.settings.custom_image2.alt }}">
+      {%- endif -%}
+       {%- if section.settings.custom_image3 != blank -%}
+        <img src="{{ section.settings.custom_image3 | img_url: '100x' }}" alt="{{ section.settings.custom_image3.alt }}">
+      {%- endif -%}
+       {%- if section.settings.custom_image4 != blank -%}
+        <img src="{{ section.settings.custom_image4 | img_url: '100x' }}" alt="{{ section.settings.custom_image4.alt }}">
+      {%- endif -%}
+       {%- if section.settings.custom_image5 != blank -%}
+        <img src="{{ section.settings.custom_image5 | img_url: '100x' }}" alt="{{ section.settings.custom_image5.alt }}">
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+</footer>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "store_name",
+      "label": "Store Name",
+      "default": "Anvogue"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "hlawitex@gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "1-333-345-6868"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "549 Oak St. Crystal Lake, IL 60014"
+    },
+    {
+      "type": "url",
+      "id": "quick_shop_link_1",
+      "label": "Quick Shop Link 1"
+    },
+    {
+      "type": "url",
+      "id": "quick_shop_link_2",
+      "label": "Quick Shop Link 2"
+    },
+    {
+      "type": "url",
+      "id": "quick_shop_link_3",
+      "label": "Quick Shop Link 3"
+    },
+    {
+      "type": "url",
+      "id": "customer_service_link_1",
+      "label": "Customer Service Link 1"
+    },
+    {
+      "type": "url",
+      "id": "customer_service_link_2",
+      "label": "Customer Service Link 2"
+    },
+    {
+      "type": "url",
+      "id": "customer_service_link_3",
+      "label": "Customer Service Link 3"
+    },
+    {
+      "type": "url",
+      "id": "customer_service_link_4",
+      "label": "Customer Service Link 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image",
+      "label": "Custom Image",
+      "info": "Upload a custom image for the footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image1",
+      "label": "Custom Image1",
+      "info": "Upload a custom image for the footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image2",
+      "label": "Custom Image2",
+      "info": "Upload a custom image for the footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image3",
+      "label": "Custom Image3",
+      "info": "Upload a custom image for the footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image4",
+      "label": "Custom Image4",
+      "info": "Upload a custom image for the footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image5",
+      "label": "Custom Image5",
+      "info": "Upload a custom image for the footer"
+    }
+  ]
+}
+{% endschema %}

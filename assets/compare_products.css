@@ -1,0 +1,82 @@
+
+.compare-page {
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+
+.compare-table {
+    width: 90%; 
+    margin: 0 auto; 
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; 
+    overflow: hidden; 
+}
+
+
+.compare-table th {
+    background-color: #f8f9fa; 
+    padding: 12px 15px; 
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #ddd; 
+}
+
+
+.compare-table tr:hover {
+    background-color: #f1f1f1; 
+}
+
+.compare-table td {
+    padding: 10px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd; 
+    word-wrap: break-word; 
+    max-width: 200px; 
+    width: 200px; 
+}
+
+
+.compare-table img {
+    width: 80px; 
+    height: auto;
+    border-radius: 8px; 
+}
+
+.compare-table a {
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.compare-table a:hover {
+    text-decoration: underline;
+}
+
+button {
+    display: block;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    float: right; 
+    margin: 20px 0;
+    margin-right:57px;
+}
+
+button:hover {
+    background-color: #c0392b; 
+}
+
+h1 {
+    text-align: center; 
+    font-size: 24px; 
+    margin-bottom: 20px; 
+}

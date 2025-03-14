@@ -1,0 +1,42 @@
+<div class="custom-product-block">
+  <div class="custom-product-block__content">
+    {% if block.settings.image %}
+      <img src="{{ block.settings.image | img_url: 'medium' }}" alt="Product Image">
+    {% endif %}
+ 
+    <div class="custom-product-block__text">
+      <h3>{{ block.settings.title }}</h3>
+      <p>{{ block.settings.description }}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-product-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .custom-product-block__content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px !important;
+  }
+  .custom-product-block img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+  .custom-product-block__text {
+    flex: 1;
+  }
+  .custom-product-block__text h3 {
+    margin: 0 0 5px;
+    font-size: 15px;
+  }
+  .custom-product-block__text p {
+    margin: 0;
+    font-size: 14px;
+  }
+</style>

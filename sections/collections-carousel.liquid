@@ -1,0 +1,397 @@
+{% schema %}
+{
+  "name": "Collections Nav",
+  "settings": [
+    {
+      "type": "text",
+      "id": "best_sellers_title",
+      "label": "Best Sellers Title",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "collection",
+      "id": "best_sellers_collection",
+      "label": "Best Sellers Collection"
+    },
+    {
+      "type": "text",
+      "id": "on_sale_title",
+      "label": "On Sale Title",
+      "default": "On Sale"
+    },
+    {
+      "type": "collection",
+      "id": "on_sale_collection",
+      "label": "On Sale Collection"
+    },
+    {
+      "type": "text",
+      "id": "new_arrivals_title",
+      "label": "New Arrivals Title",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "collection",
+      "id": "new_arrivals_collection",
+      "label": "New Arrivals Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Nav",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+
+
+
+
+<section class="collections-nav-section color-{{ section.settings.color_scheme }} isolate gradient">
+  <nav class="collections-nav">
+    <ul>
+      <li><a href="#" class="nav-link active" data-collection="best-sellers">{{ section.settings.best_sellers_title }}</a></li>
+      <li><a href="#" class="nav-link" data-collection="on-sale">{{ section.settings.on_sale_title }}</a></li>
+      <li><a href="#" class="nav-link" data-collection="new-arrivals">{{ section.settings.new_arrivals_title }}</a></li>
+    </ul>
+  </nav>
+
+  <div class="collections-grid">
+    <div class="cat-container">
+    <div class="collection-products active" id="best-sellers">
+      <div class="carousel" >
+        <div  class="carousel-inner product-grid">
+          {% for product in collections[section.settings.best_sellers_collection.handle].products limit: 8 %}
+            <div  class="carousel-item grid__item">
+              <a href="{{ product.url }}">
+                {% render 'card-product',
+                  card_product: product,
+                  show_image: true,
+                  show_title: true,
+                  show_price: true
+                %}
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control prev">&#10094;</button>
+        <button class="carousel-control next">&#10095;</button>
+      </div>
+    </div>
+    </div>
+
+  <div class="cat-container">
+    <div class="collection-products" id="on-sale">
+      <div class="carousel">
+        <div class="carousel-inner product-grid">
+          {% for product in collections[section.settings.on_sale_collection.handle].products limit: 8 %}
+            <div class="carousel-item grid__item">
+              <a href="{{ product.url }}">
+                {% render 'card-product',
+                  card_product: product,
+                  show_image: true,
+                  show_title: true,
+                  show_price: true
+                %}
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control prev">&#10094;</button>
+        <button class="carousel-control next">&#10095;</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-container">
+    <div class="collection-products" id="new-arrivals">
+      <div class="carousel">
+        <div class="carousel-inner product-grid">
+          {% for product in collections[section.settings.new_arrivals_collection.handle].products limit: 8 %}
+            <div class="carousel-item grid__item">
+              <a href="{{ product.url }}">
+                {% render 'card-product',
+                  card_product: product,
+                  show_image: true,
+                  show_title: true,
+                  show_price: true
+                %}
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control prev">&#10094;</button>
+        <button class="carousel-control next">&#10095;</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+  .cat-container {
+    position: relative;
+    max-width: 1120px; 
+    margin: 0 auto;
+    overflow: hidden;
+}
+  
+  .collections-nav-section {
+    padding: 20px;
+    text-align: center;
+  }
+  .product-grid{
+    border-radius:12px;
+  }
+
+  .collections-nav ul {
+    list-style: none;
+    width: 430px;
+    height:50px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #F7F7F7;
+    padding: 10px;
+    border-radius: 16px;
+    border: 1px solid #000;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .collections-nav ul li {
+    display: flex;
+  }
+
+  .collections-nav ul li a {
+    text-decoration: none;
+    color: #696C70;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .collections-nav ul li a.active {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .collections-grid {
+    margin-top: 30px;
+  }
+
+  .collection-products {
+    display: none;
+  }
+
+  .collection-products.active {
+    display: block;
+  }
+
+  .carousel {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .carousel-item {
+    flex: 0 0 25%;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+    border-radius:12.11px; !important
+  }
+
+  .carousel-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius:12.11px; !important
+    width: 100%;
+ 
+  }
+
+  .carousel-control {
+    position: absolute;
+    top: 37%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: #1F1F1F;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .carousel-control.prev {
+    left: 2px;
+  }
+
+  .carousel-control.next {
+    right: 2px;
+  }
+
+  @media (max-width: 1024px) {
+    .carousel-item {
+      flex: 0 0 40%; 
+    }
+  
+    .collections-nav ul {
+      width: 60%; 
+      font-size: 14px;
+      border-radius:16px;
+    }
+  
+    .collections-nav ul li a {
+      padding: 8px 16px;
+    }
+  }
+  
+  
+  @media (max-width: 1024px) {
+    .carousel-item {
+      flex: 0 0 33.33%; 
+    }
+  
+    .carousel-control {
+      display: none; 
+    }
+  
+    .carousel-inner {
+      overflow-x: auto; 
+      scroll-snap-type: x mandatory;
+    }
+  
+    .carousel-item {
+      scroll-snap-align: start; 
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .carousel-item {
+      flex: 0 0 100%; 
+    }
+    .collections-nav ul {
+      width: 60%; 
+      min-width:270px;
+      font-size: 10px;
+      border-radius:12px;
+    }
+  
+    .carousel-control {
+      display: none; 
+    }
+  
+    .carousel-inner {
+      overflow-x: auto; 
+      scroll-snap-type: x mandatory; 
+    }
+  
+    .carousel-item {
+      scroll-snap-align: start;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const navLinks = document.querySelectorAll(".nav-link");
+  const collectionGrids = document.querySelectorAll(".collection-products");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      navLinks.forEach((navLink) => navLink.classList.remove("active"));
+      collectionGrids.forEach((grid) => grid.classList.remove("active"));
+
+      this.classList.add("active");
+      const targetCollection = this.getAttribute("data-collection");
+      document.getElementById(targetCollection).classList.add("active");
+    });
+  });
+
+  const carousels = document.querySelectorAll(".carousel");
+
+  carousels.forEach((carousel) => {
+    const inner = carousel.querySelector(".carousel-inner");
+    const items = inner.querySelectorAll(".carousel-item");
+    const totalItems = items.length;
+    let currentIndex = 0;
+
+    const prevButton = carousel.querySelector(".carousel-control.prev");
+    const nextButton = carousel.querySelector(".carousel-control.next");
+
+    if (window.innerWidth > 1024) {
+      prevButton.addEventListener("click", () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          inner.style.transform = `translateX(-${currentIndex * 25}%)`; 
+        }
+      });
+
+      nextButton.addEventListener("click", () => {
+        if (currentIndex < totalItems - 4) {
+          currentIndex++;
+          inner.style.transform = `translateX(-${currentIndex * 25}%)`; 
+        }
+      });
+    }
+  });
+
+  if (window.innerWidth <= 1024) {
+    const carousels = document.querySelectorAll(".carousel");
+
+    carousels.forEach((carousel) => {
+      const inner = carousel.querySelector(".carousel-inner");
+      let isDragging = false;
+      let startX, scrollLeft;
+
+      const startDrag = (e) => {
+        isDragging = true;
+        startX = e.pageX || e.touches[0].pageX;
+        scrollLeft = inner.scrollLeft;
+      };
+
+      const duringDrag = (e) => {
+        if (!isDragging) return;
+        const x = e.pageX || e.touches[0].pageX;
+        const walk = (x - startX) * 2; 
+        inner.scrollLeft = scrollLeft - walk;
+      };
+
+      const endDrag = () => {
+        isDragging = false;
+      };
+
+      inner.addEventListener("mousedown", startDrag);
+      inner.addEventListener("touchstart", startDrag);
+
+      inner.addEventListener("mousemove", duringDrag);
+      inner.addEventListener("touchmove", duringDrag);
+
+      inner.addEventListener("mouseup", endDrag);
+      inner.addEventListener("touchend", endDrag);
+      inner.addEventListener("mouseleave", endDrag);
+    });
+  }
+});
+</script>
